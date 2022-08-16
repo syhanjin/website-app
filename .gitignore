@@ -1,0 +1,7 @@
+uni_modules
+node_modules
+unpackage
+js_sdk
+package*.json
+components
+.hbuilderx
