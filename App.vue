@@ -53,7 +53,7 @@
             await this.$http
               .get('/users/me/')
               .then(resp => {
-                this.$store.commit('setMe', resp)
+                this.$store.commit('setMe', resp.data)
               })
               .catch(err => {
                 if (err.statusCode == 401) {
@@ -73,7 +73,7 @@
             if (this.$store.state.me.perfection.role == "student") {
               await this.$http.get('/perfection/student/me/')
                 .then(resp => {
-                  this.$store.commit('setPerfection', resp)
+                  this.$store.commit('setPerfection', resp.data)
                 })
                 .catch(err => {
                   console.log(err)

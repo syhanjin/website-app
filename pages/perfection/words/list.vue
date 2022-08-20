@@ -1,10 +1,6 @@
 <template>
   <view>
-    <u-navbar :autoBack="true" :fixed="false">
-      <text slot="center">词汇打卡</text>
-      <view slot="left">
-        <i class="uicon-arrow-left" />
-      </view>
+    <u-navbar title="词汇打卡">
       <navigator slot="right" url="/pages/perfection/words/set_libraries">
         <u-icon name="setting-fill"></u-icon>
       </navigator>
@@ -64,8 +60,8 @@
         await this.$http.get('/perfection/words/?page=' + this.page)
           .then(resp => {
             this.page++
-            this.list = this.list.concat(resp.results)
-            if (!resp.next) {
+            this.list = this.list.concat(resp.data.results)
+            if (!resp.data.next) {
               this.status = 'nomore'
             }
           })

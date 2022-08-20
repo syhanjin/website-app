@@ -1,8 +1,6 @@
 <template>
   <view class="login-box">
-    <u-navbar :autoBack="true">
-      <text slot="center">账号登录</text>
-    </u-navbar>
+    <u-navbar title="账号登录"></u-navbar>
     <u-loading-page :loading="submitting" loading-text="登录中..." />
     <p class="title">登录</p>
     <u-form :labelWidth="0" :rules="rules" ref="form" :model="form">
@@ -37,7 +35,7 @@
   import {
     redirectTo
   } from '@/utils/pages.js'
-  // #ifdef APP-PLUSs
+  // #ifdef APP-PLUS
   import {
     bindUserCid
   } from '@/utils/getui.js'
@@ -87,7 +85,7 @@
           this.$http.post('/token/login/', this.form)
             .then(resp => {
               this.submitting = false
-              const token = resp.auth_token
+              const token = resp.data.auth_token
               this.$store.commit('setToken', token)
               uni.setStorageSync('token', token)
               this.submitText = '登录成功'

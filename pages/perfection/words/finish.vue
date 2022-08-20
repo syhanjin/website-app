@@ -1,10 +1,7 @@
 <template>
   <view>
-    <u-navbar :autoBack="true" :fixed="false">
+    <u-navbar>
       <text slot="center">词汇打卡上传{{wp.created || '' | dateFormat}}</text>
-      <view slot="left">
-        <i class="uicon-arrow-left" />
-      </view>
     </u-navbar>
     <u-modal :show="modal.show" :title="modal.title" :content='modal.content' @confirm="modal.show=false"></u-modal>
     <view class="step">
@@ -149,14 +146,14 @@
       async fetchData() {
         await this.$http.get('/perfection/words/' + this.wp_id)
           .then(resp => {
-            this.wp = resp
+            this.wp = resp.data
           })
         this.$http.get('/perfection/words/' + this.wp_id + '/review/?simple=true')
           .then(resp => {
-            resp.review.map(value => {
+            resp.data.review.map(value => {
               this.$set(this.review, value, true)
             })
-            const mod = resp.review.length % 3
+            const mod = resp.data.review.length % 3
             this.fix = mod ? (3 - mod) : 0
           })
       }

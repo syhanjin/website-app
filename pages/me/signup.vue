@@ -1,8 +1,6 @@
 <template>
   <view>
-    <u-navbar :autoBack="true">
-      <text slot="center">注册账号</text>
-    </u-navbar>
+    <u-navbar title="注册账号"></u-navbar>
     <u-form ref="form" :model="form" :rules="rules" class="signup" labelWidth="80px">
       <u-form-item>
         <h3>注册用户</h3>
@@ -123,7 +121,7 @@
               password: this.form.pwd2
             })
             .then((resp) => {
-              if (resp.uuid) {
+              if (resp.data.uuid) {
                 this.submitText = '创建成功'
                 uni.showModal({
                   title: '激活账户',
@@ -131,7 +129,7 @@
                   showCancel: false,
                   success: () => {
                     uni.redirectTo({
-                      url: '/pages/me/login?redirect='+this.redirect
+                      url: '/pages/me/login?redirect=' + this.redirect
                     })
                   }
                 })

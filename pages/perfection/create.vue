@@ -1,6 +1,6 @@
 <template>
   <view>
-    <u-navbar @leftClick="back" :fixed="false" title="开通打卡系统"></u-navbar>
+    <u-navbar @leftClick="back" title="开通打卡系统"></u-navbar>
     <u-text mode="text" align="center" type="info" text="........................"></u-text>
     <div v-if="errors.length" class="errors">
       <text v-for="(error, index) in errors" :key="index">{{ error }}</text>

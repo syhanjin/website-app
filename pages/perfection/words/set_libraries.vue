@@ -1,6 +1,6 @@
 <template>
   <view>
-    <u-navbar autoBack :fixed="false" title="选择词库">
+    <u-navbar title="选择词库">
       <u-button slot="right" plain size="mini" shape="circle" @click="setLibraries">设置词库</u-button>
     </u-navbar>
     <u-checkbox-group class="library-box" v-model="form_libraries" placement="column" @change="changed = true">
@@ -51,7 +51,7 @@
       async fetchData() {
         await this.$http.get('/perfection/word_libraries/')
           .then(resp => {
-            this.libraries = resp
+            this.libraries = resp.data
           })
       },
       label(lib) {

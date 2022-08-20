@@ -4,11 +4,12 @@
     <view class="place">
 
     </view>
-    <view v-if="$store.state.me.perfection">
+    <template v-if="$store.state.me.perfection&&$store.state.me.perfection.role=='student'">
+      <!-- 学生端部分 -->
       <view class="warnings">
-        <u-alert type="error" effect="dark" :center="true" title="有欠下的单词打卡" @click="toPage(list[0].path)"
+        <u-alert type="error" effect="dark" :center="true" title="有欠下的单词打卡" @click="toPage(list[1].path)"
           v-if="$store.state.perfection.has_missed_words_perfection" />
-        <u-alert type="warning" effect="dark" :center="true" title="有未完成的单词打卡" @click="toPage(list[0].path)"
+        <u-alert type="warning" effect="dark" :center="true" title="有未完成的单词打卡" @click="toPage(list[1].path)"
           v-else-if="$store.state.perfection.has_unfinished_words_perfection" />
       </view>
       <u-grid :border="true">
@@ -17,33 +18,42 @@
           <text class="grid-text">{{item.title}}</text>
         </u-grid-item>
       </u-grid>
-    </view>
-    <view v-else-if="$store.state.isAuthenticated">
+    </template>
+    <!-- 教师端部分 -->
+    <teacher v-else-if="$store.state.me.perfection&&$store.state.me.perfection.role=='teacher'" />
+    <template v-else-if="$store.state.isAuthenticated">
       <u-text mode="text" type="error" text="您未开通打卡系统，该功能无法使用" align="center"></u-text>
       <u-button text="点击前往开通" @click="toCreate"></u-button>
-    </view>
-    <view v-else>
+    </template>
+    <template v-else>
       <text>请先登录</text>
-    </view>
+    </template>
   </view>
 </template>
 
 <script>
-  // import {getCurrentPageUrl} from '@/utils/pages.js'
-  // import {hasPerfection} from '@/utils/auth.js'
+  import teacher from '@/pages/perfection/teacher/teacher.vue'
   export default {
+    components: {
+      teacher
+    },
     data() {
       return {
         list: [{
-          name: 'file-text',
-          title: '单词打卡',
-          path: '/pages/perfection/words/list'
-        },
-        {
-          name: 'info-circle',
-          title: '打卡系统说明',
-          path: '/pages/perfection/readme'
-        }]
+            name: 'list-dot',
+            title: '班级',
+            path: '/pages/perfection/class/list'
+          },{
+            name: 'file-text',
+            title: '单词打卡',
+            path: '/pages/perfection/words/list'
+          },
+          {
+            name: 'info-circle',
+            title: '打卡系统说明',
+            path: '/pages/perfection/readme'
+          }
+        ]
       }
     },
     onLoad() {

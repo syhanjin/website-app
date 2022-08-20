@@ -1,10 +1,7 @@
 <template>
   <view>
-    <u-navbar :autoBack="true" :fixed="false">
+    <u-navbar>
       <text slot="center">词汇打卡{{wp.created || '' | dateFormat}}</text>
-      <view slot="left">
-        <i class="uicon-arrow-left" />
-      </view>
     </u-navbar>
     <u-skeleton rows="25" :loading="loading"
       :rowsHeight="[75, 30, 60, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45]"
@@ -15,6 +12,7 @@
         </view>
         <view class="downloads">
           <text class="title">下载文档</text>
+          <text>由于「打卡版」每次会随机排序，所以尽可能打印下来再写</text>
           <u-row>
             <u-col :span="5.75">
               <u-button @click="download('remember')">下载「记忆版」</u-button>
@@ -119,17 +117,17 @@
       async fetchData() {
         await this.$http.get('/perfection/words/' + this.wp_id)
           .then(resp => {
-            this.wp = resp
+            this.wp = resp.data
           })
         if (this.wp.is_finished) {
           await this.$http.get('/perfection/words/' + this.wp_id + '/unremembered/')
             .then(resp => {
-              this.word_list = resp.unremembered
+              this.word_list = resp.data.unremembered
             })
         } else {
           await this.$http.get('/perfection/words/' + this.wp_id + '/remember/')
             .then(resp => {
-              this.word_list = resp.remember
+              this.word_list = resp.data.remember
             })
         }
         this.loading = false

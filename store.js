@@ -46,6 +46,7 @@ const store = new Store({
     removeToken(state) {
       state.token = ''
       state.isAuthenticated = false
+      state.me = {}
     },
     // setWordsPerfectionLibraries(state, libraries) {
     //   state.perfection.word_libraries = libraries

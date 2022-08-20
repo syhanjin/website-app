@@ -86,8 +86,64 @@
         "enablePullDownRefresh": false
       }
 
+    }, {
+      "path": "pages/perfection/teacher/class/class",
+      "style": {
+        "enablePullDownRefresh": true
+      }
+
+    }, {
+      "path": "pages/perfection/teacher/class/list",
+      "style": {
+        "enablePullDownRefresh": true
+      }
+
+    }, {
+      "path": "pages/perfection/teacher/class/subject/list",
+      "style": {
+        "enablePullDownRefresh": true
+      }
+
+    }, {
+      "path": "pages/perfection/teacher/class/subject/subject",
+      "style": {
+        "enablePullDownRefresh": true
+      }
+
+    }, {
+      "path": "pages/perfection/teacher/class/subject/check",
+      "style": {
+        "enablePullDownRefresh": false
+      }
+
+    }, {
+      "path": "pages/perfection/teacher/class/create",
+      "style": {
+        "enablePullDownRefresh": false
+      }
+
+    }, {
+      "path": "pages/perfection/class/class",
+      "style": {
+        "enablePullDownRefresh": false
+      }
+
+    }, {
+      "path": "pages/perfection/class/list",
+      "style": {
+        "enablePullDownRefresh": true
+      }
+
     }
-  ],
+      ,{
+            "path" : "pages/perfection/class/add",
+            "style" :                                                                                    
+            {
+                "enablePullDownRefresh": false
+            }
+            
+        }
+    ],
   "globalStyle": {
     "navigationBarTextStyle": "black",
     "navigationBarBackgroundColor": "#F8F8F8",
@@ -117,7 +173,7 @@
       }
     }, {
       "name": "perfection",
-      "text": "单词打卡",
+      "text": "打卡",
       "pagePath": "pages/perfection/perfection",
       "iconfont": {
         "text": "\ue66e",

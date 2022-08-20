@@ -1,9 +1,6 @@
 <template>
   <view>
-    <u-navbar :autoBack="true" title="更新签名" :fixed="false">
-      <view slot="left">
-        <i class="uicon-arrow-left" />
-      </view>
+    <u-navbar title="更新签名">
       <u-button slot="right" plain size="mini" shape="circle" @click="setSignature">发布</u-button>
     </u-navbar>
     <u-textarea v-model="signature" :focus="true" :count="true" maxlength="80" :adjustPosition="false"
@@ -32,7 +29,7 @@
             new_signature: this.signature
           })
           .then(resp => {
-            this.$store.commit('setSignature', resp.signature)
+            this.$store.commit('setSignature', resp.data.signature)
             uni.navigateBack()
           })
           .catch(err => {

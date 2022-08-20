@@ -20,6 +20,9 @@ export function hasPerfection(uni, store, url) {
         }))
       })
     }
+    if (url.startsWith('/pages/perfection/teacher') && store.state.me.perfection.role !== 'teacher'){
+      uni.switchTab({url:"/pages/perfection/perfection"})
+    }
   }
   if (store.state.me.perfection === undefined) {
     // 数据还未获取，绑定事件

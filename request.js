@@ -9,7 +9,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 const request = uni_request({
   baseURL: baseURL,
-  statusCode: [200, 201],
+  statusCode: [200, 201, 204],
   // ssl
 })
 

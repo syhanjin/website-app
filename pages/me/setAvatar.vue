@@ -1,10 +1,6 @@
 <template>
   <view>
-    <u-navbar :autoBack="true" title="修改头像" :fixed="false">
-      <view slot="left">
-        <i class="uicon-arrow-left" />
-      </view>
-    </u-navbar>
+    <u-navbar title="修改头像"></u-navbar>
     <!-- #ifdef APP-PLUS -->
     该页面与APP端不兼容，需要更改头像请到网页端
     <!-- #endif -->
@@ -35,8 +31,12 @@
   // #ifdef H5
   import VueCropper from "@/node_modules/vue-cropper/src/vue-cropper"
   // #endif
-  import { checkAuth } from '@/utils/auth.js'
-  import { getCurrentPageUrl } from '@/utils/pages.js'
+  import {
+    checkAuth
+  } from '@/utils/auth.js'
+  import {
+    getCurrentPageUrl
+  } from '@/utils/pages.js'
   export default {
     // #ifdef H5
     components: {

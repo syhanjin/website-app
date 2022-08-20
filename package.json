@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "moment": "^2.29.4",
+    "vue-cropper": "^0.5.8"
+  }
+}
