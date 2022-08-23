@@ -125,7 +125,7 @@
     }, {
       "path": "pages/perfection/class/class",
       "style": {
-        "enablePullDownRefresh": false
+        "enablePullDownRefresh": true
       }
 
     }, {
@@ -134,16 +134,32 @@
         "enablePullDownRefresh": true
       }
 
+    }, {
+      "path": "pages/perfection/class/add",
+      "style": {
+        "enablePullDownRefresh": false
+      }
+
+    }, {
+      "path": "pages/perfection/teacher/class/student/student",
+      "style": {
+        "enablePullDownRefresh": false
+      }
+
+    }, {
+      "path": "pages/perfection/teacher/class/student/list",
+      "style": {
+        "enablePullDownRefresh": true
+      }
+
+    }, {
+      "path": "pages/perfection/class/settings",
+      "style": {
+        "enablePullDownRefresh": false
+      }
+
     }
-      ,{
-            "path" : "pages/perfection/class/add",
-            "style" :                                                                                    
-            {
-                "enablePullDownRefresh": false
-            }
-            
-        }
-    ],
+  ],
   "globalStyle": {
     "navigationBarTextStyle": "black",
     "navigationBarBackgroundColor": "#F8F8F8",

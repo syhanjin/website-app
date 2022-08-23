@@ -6,17 +6,31 @@
       </navigator>
     </u-navbar>
     <u-cell-group>
-      <u-cell v-for="words in list" :key="words.id" :isLink="true" :url="payload+words.id">
-        <text slot="title">{{words.created|dateFormat}}</text>
-        <view slot="value" v-if="words.is_finished">
-          <u-text mode="text" type="success" v-if="words.acc>=0.9" :text="'优秀('+words.acc_str+')'"></u-text>
-          <u-text mode="text" type="warning" v-else-if="words.acc>=0.7" :text="'合格('+words.acc_str+')'"></u-text>
-          <u-text mode="text" type="error" v-else :text="'不合格('+words.acc_str+')'"></u-text>
-          <!-- <u-text mode="text" type="success" v-if="words.is_finished" text=""></u-text> -->
+      <u-cell v-for="item in list" :key="item.id" :isLink="true" :url="payload+item.id">
+        <text slot="title">{{item.created|dateFormat}}</text>
+        <!-- <view slot="value" v-if="item.is_finished">
+          <u-text mode="text" type="success" v-if="item.acc>=0.9" :text="'优秀('+item.acc_str+')'"></u-text>
+          <u-text mode="text" type="warning" v-else-if="item.acc>=0.7" :text="'合格('+item.acc_str+')'"></u-text>
+          <u-text mode="text" type="error" v-else :text="'不合格('+item.acc_str+')'"></u-text>
+        </view> -->
+        <view slot="value" style="display: flex;">
+          <view class="tag" v-if="item.is_finished">
+            <u-tag type="success" v-if="item.acc>=0.9" :text="'优秀('+item.acc_str+')'" plain size="mini"></u-tag>
+            <u-tag type="warning" v-else-if="item.acc>=0.7" :text="'合格('+item.acc_str+')'" plain size="mini"></u-tag>
+            <u-tag type="error" v-else :text="'不合格('+item.acc_str+')'" plain size="mini"></u-tag>
+          </view>
+          <u-tag class="tag" v-else text="未完成" size="mini" type="error"></u-tag>
+          <view class="tag tag-rating" v-if="item.is_checked">
+            <u-tag v-if="item.rating=='pass'" text="Pass" plain size="mini" type="success"></u-tag>
+            <u-tag v-else text="Fail" plain size="mini" type="error"></u-tag>
+          </view>
+          <view class="tag tag-rating" v-else-if="item.is_finished">
+            <u-tag text="未检查" plain plainFill size="mini" type="error"></u-tag>
+          </view>
         </view>
-        <view slot="value" v-else>
+        <!-- <view slot="value" v-else>
           <u-text mode="text" type="info" text="未完成"></u-text>
-        </view>
+        </view> -->
       </u-cell>
     </u-cell-group>
     <u-loadmore :status="status" />
@@ -70,6 +84,17 @@
   }
 </script>
 
-<style>
+<style scoped>
+  .tag {
+    margin: 2px;
+  }
 
+  .tag-rating>>>.u-tag {
+    width: 3.3em;
+  }
+
+  .tag-rating>>>.u-tag .u-tag__text {
+    flex: 1;
+    text-align: center;
+  }
 </style>

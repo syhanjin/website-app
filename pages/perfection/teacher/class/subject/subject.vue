@@ -7,7 +7,7 @@
     </u-navbar>
     <u-cell-group>
       <u-cell size="large" v-for="(item, index) in list" :key="index" :isLink="true" :url="payload+item.id">
-        <text slot="title">{{item.user}}</text>
+        <text slot="title">{{item.class_.nickname || item.user}}</text>
         <view slot="value" style="display: flex;">
           <view class="tag" v-if="item.is_finished">
             <u-tag type="success" v-if="item.acc>=0.9" :text="'优秀('+item.acc_str+')'" plain size="mini"></u-tag>
@@ -19,7 +19,9 @@
             <u-tag v-if="item.rating=='pass'" text="Pass" plain size="mini" type="success"></u-tag>
             <u-tag v-else text="Fail" plain size="mini" type="error"></u-tag>
           </view>
-          <u-tag class="tag" v-else-if="item.is_finished" text="未检查" size="mini" type="error"></u-tag>
+          <view class="tag tag-rating" v-else-if="item.is_finished">
+            <u-tag text="未检查" plain plainFill size="mini" type="error"></u-tag>
+          </view>
         </view>
         <!--view slot="label" style="font-size: 12px;color: #8d8d8d">
           <view v-if="item.is_finished">
@@ -54,8 +56,7 @@
     methods: {
       async fetchData() {
         await this.$http.get(
-          '/perfection/class/' + this._option.class_id + '/subject/' + this._option.subject + '/list_day?date=' +
-          this._option.date
+          `/perfection/class/${this._option.class_id}/subject/${this._option.subject}/list_day?date=${this._option.date}`
         ).then(resp => {
           this.list = resp.data
         })
@@ -74,5 +75,12 @@
     margin: 2px;
   }
 
-  .tag-rating {}
+  .tag-rating>>>.u-tag {
+    width: 3.3em;
+  }
+
+  .tag-rating>>>.u-tag .u-tag__text {
+    flex: 1;
+    text-align: center;
+  }
 </style>

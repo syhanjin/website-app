@@ -3,7 +3,7 @@
     <u-navbar>
       <view slot="center">
         <text>{{_option.date}}</text>
-        <text style="color: green; margin: 0 5px;">{{obj.user}} </text>
+        <text style="color: green; margin: 0 5px;">{{obj.class_.nickname || obj.user.name}} </text>
         <text>{{_option.sn}}</text>
       </view>
     </u-navbar>
@@ -48,7 +48,10 @@
     },
     data() {
       return {
-        obj: {},
+        obj: {
+          user: {},
+          class_: {},
+        },
         loading: true
       }
     },
@@ -61,6 +64,7 @@
         await this.$http.get(this.baseURL + '/get_one?id=' + this._option.id)
           .then(resp => {
             this.obj = resp.data
+            // console.log(this.obj)
             this.loading = false
           })
       },

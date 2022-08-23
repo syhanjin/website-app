@@ -23,7 +23,7 @@
             </u-col>
           </u-row>
         </view>
-        <view class="remember-box">
+        <view class="remember-box" v-if="word_list.length">
           <u-row class="remember-row sticky">
             <u-col :span="6">
               <u-button @click="hideAll">全部隐藏中文</u-button>
@@ -41,6 +41,9 @@
               <text class="cell chinese">{{word.chinese}}</text>
             </view>
           </view>
+        </view>
+        <view v-else>
+          <u-text align="center" type="info" text="今天没有需要记的单词"></u-text>
         </view>
       </view>
       <view v-else>

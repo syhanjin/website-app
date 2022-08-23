@@ -1,0 +1,79 @@
+.contact_wrap{
+	position: relative;
+	.head_list{
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		padding-left: 20px;
+		background-color: white;
+		.head_item{
+			width: 100%;
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			border-bottom: 1px solid  #f1f1f1;
+		}
+	}
+	.contact_list{
+		width: 100%;
+		padding-bottom: 70px;
+		.contact_item{
+			width: 100%;
+			background-color: white;
+			display: flex;
+			flex-direction: column;
+			.contact_letter{
+				width: 100%;
+				height: 30px;
+				background-color: #f7f7f7;
+				padding-left: 15px;
+				line-height: 30px;
+				font-weight: 500;
+			}
+			.lettar_list{
+				width: 100%;
+				display: flex;
+				flex-direction: column;
+				.letter_item{
+					border-bottom: 1px solid  #f1f1f1;
+					display: flex;
+					flex-direction: row;
+					align-items: center;
+					padding-left: 20px;
+					image{
+						margin-left: 8px;
+						border-radius: 5px;
+					}
+					.contact_contant{
+						margin-left: 10px;
+					}
+				}
+			}
+		}
+	}
+	.contact_select_wrap{
+		position: fixed;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		height: 60px;
+		background-color: #f1f1f1;
+		z-index: 999;
+		display: flex;
+		align-items: center;
+		justify-content: right;
+		.select_finish{
+			background-color: gray;
+			margin-right: 15px;
+			border-radius: 5px;
+			padding: 3px 8px;
+			opacity: 0.3;
+		}
+		.select_finish_active{
+			margin-right: 15px;
+			border-radius: 5px;
+			padding: 3px 8px;
+			color: white;
+		}
+	}
+}

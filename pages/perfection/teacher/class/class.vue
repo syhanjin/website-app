@@ -6,6 +6,11 @@
         <text style="color: #8d8d8d;">({{class_.students}})</text>
       </view>
     </u-navbar>
+    <view>
+      <navigator :url="urlStudents">
+        <u-button text="学生管理"></u-button>
+      </navigator>
+    </view>
     <view class="subject">
       <u-grid :border="true">
         <u-grid-item v-for="(item, index) in class_.subject" :key="index" @click="toSubject(item)">
@@ -38,7 +43,7 @@
     },
     methods: {
       async fetchData() {
-        await this.$http.get('/perfection/class/' + this.id)
+        await this.$http.get(`/perfection/class/${this.id}/`)
           .then(resp => {
             this.class_ = resp.data
             // console.log(this.class_)
@@ -47,10 +52,13 @@
       },
       toSubject(subject) {
         uni.navigateTo({
-          url: '/pages/perfection/teacher/class/subject/list?class_id=' + this.id +
-            '&subject=' + subject.id +
-            '&sn=' + subject.name // 这个主要是数据的传递有点麻烦
+          url: `/pages/perfection/teacher/class/subject/list?class_id=${this.id}&subject=${subject.id}&sn=${subject.name}`
         })
+      }
+    },
+    computed: {
+      urlStudents() {
+        return `/pages/perfection/teacher/class/student/list?id=${this.id}`
       }
     }
   }

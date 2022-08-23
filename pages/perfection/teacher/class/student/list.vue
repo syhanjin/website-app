@@ -1,6 +1,7 @@
 <template>
   <view>
-    <u-navbar :title="class_.name">
+    <u-navbar>
+      <text slot="center">{{class_.name}}-学生管理</text>
       <navigator slot="right" :url="settingsUrl">
         <u-icon name="setting-fill"></u-icon>
       </navigator>
@@ -12,9 +13,6 @@
             <u-avatar slot="icon" :src="item.perfection.user.avatar"></u-avatar>
             <view slot="title">
               <text>{{item.name()}}</text>
-            </view>
-            <view slot="value">
-              <u-tag v-if="item.perfection.user.uuid == $store.state.me.uuid" text="我" plain size="mini"></u-tag>
             </view>
           </u-cell>
         </view>
@@ -87,7 +85,6 @@
       },
 
       longtap(item, index) {
-        if (item.perfection.user.uuid != this.$store.state.me.uuid) return
         // console.log('longtap')
         uni.showModal({
           title: '设置群昵称',
