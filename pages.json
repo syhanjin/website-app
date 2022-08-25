@@ -41,8 +41,8 @@
       "style": {
         "enablePullDownRefresh": false
       }
-
-    }, {
+    },
+    {
       "path": "pages/perfection/perfection",
       "style": {
         "enablePullDownRefresh": true
@@ -158,6 +158,18 @@
         "enablePullDownRefresh": false
       }
 
+    }, {
+      "path": "pages/me/reset_password",
+      "style": {
+        "enablePullDownRefresh": false
+      }
+
+    }, {
+      "path": "pages/me/resend_activation",
+      "style": {
+        "enablePullDownRefresh": false
+      }
+
     }
   ],
   "globalStyle": {
@@ -177,38 +189,41 @@
     "selectedColor": "rgb(0, 122, 255)",
     "backgroundColor": "#F8F8F8",
     "list": [{
-      "name": "home",
-      "text": "首页",
-      "pagePath": "pages/index/index",
-      "iconfont": {
-        "text": "\ue965",
-        "selectedText": "\ue964",
-        "color": "rgb(0, 0, 0)",
-        "selectedColor": "rgb(0, 122, 255)",
-        "fontSize": "24px"
+        "name": "home",
+        "text": "首页",
+        "pagePath": "pages/index/index",
+        "iconfont": {
+          "text": "\ue965",
+          "selectedText": "\ue964",
+          "color": "rgb(0, 0, 0)",
+          "selectedColor": "rgb(0, 122, 255)",
+          "fontSize": "24px"
+        }
+      },
+      {
+        "name": "perfection",
+        "text": "打卡",
+        "pagePath": "pages/perfection/perfection",
+        "iconfont": {
+          "text": "\ue66e",
+          "selectedText": "\ue634",
+          "color": "rgb(0, 0, 0)",
+          "selectedColor": "rgb(0, 122, 255)",
+          "fontSize": "24px"
+        }
+      },
+      {
+        "name": "me",
+        "text": "我",
+        "pagePath": "pages/me/me",
+        "iconfont": {
+          "text": "\ue628",
+          "selectedText": "\ue614",
+          "color": "rgb(0, 0, 0)",
+          "selectedColor": "rgb(0, 122, 255)",
+          "fontSize": "24px"
+        }
       }
-    }, {
-      "name": "perfection",
-      "text": "打卡",
-      "pagePath": "pages/perfection/perfection",
-      "iconfont": {
-        "text": "\ue66e",
-        "selectedText": "\ue634",
-        "color": "rgb(0, 0, 0)",
-        "selectedColor": "rgb(0, 122, 255)",
-        "fontSize": "24px"
-      }
-    }, {
-      "name": "me",
-      "text": "我",
-      "pagePath": "pages/me/me",
-      "iconfont": {
-        "text": "\ue628",
-        "selectedText": "\ue614",
-        "color": "rgb(0, 0, 0)",
-        "selectedColor": "rgb(0, 122, 255)",
-        "fontSize": "24px"
-      }
-    }]
+    ]
   }
 }

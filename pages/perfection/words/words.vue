@@ -165,7 +165,10 @@
         }
         // 请求封装兼容性问题
         // #ifdef APP-PLUS
-        const downloadTask = uni.downloadFile({
+        uni.showLoading({
+          title: `下载中...`
+        });
+        let downloadTask = uni.downloadFile({
           url: url,
           header: header,
           success: (res) => {
@@ -173,6 +176,7 @@
               uni.saveFile({
                 tempFilePath: res.tempFilePath,
                 success: (res) => {
+                  uni.hideLoading()
                   uni.openDocument({
                     filePath: res.savedFilePath
                   })
@@ -180,7 +184,12 @@
               })
             }
           }
-        });
+        })
+        downloadTask.onProgressUpdate((res) => {
+          uni.showLoading({
+            title: `下载中(${res.progress}%)`
+          });
+        })
         //#endif
         //#ifdef H5
         uni.showToast({
@@ -189,7 +198,10 @@
           duration: 1500
         })
         setTimeout(() => {
-          uni.downloadFile({
+          uni.showLoading({
+            title: `下载中...`
+          });
+          let downloadTask = uni.downloadFile({
             url: url,
             header: header,
             success: (res) => {
@@ -200,8 +212,14 @@
                 eleLink.target = '_Blank'
                 eleLink.click()
                 URL.revokeObjectURL(eleLink.href)
+                uni.hideLoading()
               }
             }
+          })
+          downloadTask.onProgressUpdate((res) => {
+            uni.showLoading({
+              title: `下载中(${res.progress}%)`
+            });
           })
         }, 1500)
         //#endif

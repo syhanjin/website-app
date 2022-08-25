@@ -1,7 +1,7 @@
 <template>
   <view>
     <u-navbar title="注册账号"></u-navbar>
-    <u-form ref="form" :model="form" :rules="rules" class="signup" labelWidth="80px">
+    <u--form ref="form" :model="form" :rules="rules" class="signup" labelWidth="80px">
       <u-form-item>
         <h3>注册用户</h3>
       </u-form-item>
@@ -33,7 +33,7 @@
           </u-col>
         </u-row>
       </u-form-item>
-    </u-form>
+    </u--form>
   </view>
 </template>
 

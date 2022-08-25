@@ -72,9 +72,12 @@
           .then(resp => {
             this.changed = false
             uni.$emit('fetch-data', {perfection: true})
-            uni.showToast({
+            uni.showModal({
               title: '设置成功',
-              success: uni.navigateBack()
+              content: '修改的词库将在下次生成打卡时生效',
+              success: (res) => {
+                if(res.confirm) uni.navigateBack()
+              }
             })
           })
       }

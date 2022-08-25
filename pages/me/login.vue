@@ -24,9 +24,17 @@
         <u-button @click="submit">{{submitText}}</u-button>
       </u-form-item>
     </u-form>
-    <div class="signup">
+    <div class="other signup">
       <text mode="text">没有账号？</text>
       <navigator :url="'/pages/me/signup?redirect='+redirect" style="color: blue">前往注册</navigator>
+    </div>
+    <div class="other reset-password">
+      <text mode="text">忘记密码？</text>
+      <navigator :url="'/pages/me/reset_password?redirect='+redirect" style="color: blue">找回密码</navigator>
+    </div>
+    <div class="other resend-activation">
+      <text mode="text">没有收到激活邮件？</text>
+      <navigator :url="'/pages/me/resend_activation?redirect='+redirect" style="color: blue">重新发送</navigator>
     </div>
   </view>
 </template>
@@ -143,7 +151,7 @@
     margin-bottom: 15px;
   }
 
-  .signup {
+  .other {
     display: flex;
     justify-content: flex-end;
     align-items: center;

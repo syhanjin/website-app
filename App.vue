@@ -24,16 +24,21 @@
       }
       const _handlePush = function(msg) {
         if (msg.payload.action == "open_page") {
-          redirectTo(uni, msg.payload.url)
+          uni.switchTab({
+            url: '/pages/index/index',
+            success: redirectTo(uni, msg.payload.url)
+          })
         }
       };
       plus.push.addEventListener('click', _handlePush);
       plus.push.addEventListener('receive', _handlePush);
-      plus.runtime.setBadgeNumber(0);
       // #endif
     },
     async onShow() {
       await this.fetchData()
+      // #ifdef APP-PLUS
+      plus.runtime.setBadgeNumber(0);
+      // #endif
     },
     onHide: function() {
 
