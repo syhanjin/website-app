@@ -6,10 +6,12 @@
     <u-modal :show="modal.show" :title="modal.title" :content='modal.content' @confirm="modal.show=false"></u-modal>
     <view class="step">
       <finish-steps :current="0" />
+      <u-search v-model="s1__kw" shape="square" :showAction="false" margin="5px 2vw" placeholder="请输入单词进行查找"></u-search>
       <view class="word-box">
         <u-button class="s1__word" v-for="(v, k, i) in review" :key="k" @click="$set(review, k, !v)"
-          :type="v?'info':'primary'">{{k}}</u-button>
-        <u-button class="s1__word" v-for="i in fix" :key="i" disabled></u-button>
+          :type="v?'info':'primary'" v-if="!s1__kw||k.startsWith(s1__kw)">{{k}}</u-button>
+        <!-- <u-button class="s1__word fix" disabled></u-button> -->
+        <u-button class="s1__word" v-for="i in fix" :key="i" v-if="!s1__kw" disabled></u-button>
       </view>
     </view>
     <view class="step">
@@ -61,7 +63,8 @@
           show: false,
           title: '',
           content: ''
-        }
+        },
+        s1__kw: ''
       }
     },
     async onLoad(option) {
@@ -69,7 +72,7 @@
       if (!this.wp_id) {
         uni.showModal({
           title: '参数错误',
-          content: '在提交打卡时，我们必须收到一个wp_id，但是您的wp_id为'+this.wp_id+'。\n如有疑问，请将此弹窗截图发送给开发者',
+          content: '在提交打卡时，我们必须收到一个wp_id，但是您的wp_id为' + this.wp_id + '。\n如有疑问，请将此弹窗截图发送给开发者',
           showCancel: false,
           complete: () => {
             uni.navigateBack()
@@ -79,18 +82,21 @@
       } else {
         await this.fetchData()
         if (this.wp.is_finished) {
-        uni.showModal({
-          title: '打卡已完成',
-          content: '本次打卡已完成',
-          showCancel: false,
-          complete: () => {
-            uni.navigateBack()
-          }
-        })
+          uni.showModal({
+            title: '打卡已完成',
+            content: '本次打卡已完成',
+            showCancel: false,
+            complete: () => {
+              uni.navigateBack()
+            }
+          })
         }
       }
     },
     methods: {
+      // s1KwChange(value){
+
+      // },
       pictureDelete(event) {
         this.picture.fileList.splice(event.index, 1)
       },
@@ -191,6 +197,10 @@
     margin-bottom: 5px;
     width: 30%;
     font-size: 16px;
+  }
+
+  .s1__word.fix {
+    flex: 1;
   }
 
   .s2__picture {

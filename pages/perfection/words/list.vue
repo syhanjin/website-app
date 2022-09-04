@@ -15,9 +15,9 @@
         </view> -->
         <view slot="value" style="display: flex;">
           <view class="tag" v-if="item.is_finished">
-            <u-tag type="success" v-if="item.acc>=0.9" :text="'优秀('+item.acc_str+')'" plain size="mini"></u-tag>
-            <u-tag type="warning" v-else-if="item.acc>=0.7" :text="'合格('+item.acc_str+')'" plain size="mini"></u-tag>
-            <u-tag type="error" v-else :text="'不合格('+item.acc_str+')'" plain size="mini"></u-tag>
+            <u-tag type="success" v-if="item.acc>=0.9" :text="'优秀('+percentage(item.acc)+')'" plain size="mini"></u-tag>
+            <u-tag type="warning" v-else-if="item.acc>=0.7" :text="'合格('+percentage(item.acc)+')'" plain size="mini"></u-tag>
+            <u-tag type="error" v-else :text="'不合格('+percentage(item.acc)+')'" plain size="mini"></u-tag>
           </view>
           <u-tag class="tag" v-else text="未完成" size="mini" type="error"></u-tag>
           <view class="tag tag-rating" v-if="item.is_checked">
@@ -69,6 +69,9 @@
       await uni.stopPullDownRefresh()
     },
     methods: {
+      percentage(acc){
+        return (acc * 100).toFixed(2) + '%'
+      },
       async loadPage(page) {
         this.page = page || this.page
         await this.$http.get('/perfection/words/?page=' + this.page)
