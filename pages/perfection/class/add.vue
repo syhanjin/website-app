@@ -28,13 +28,14 @@
           })
         })
         .catch(err => {
-          if(err.statusCode === 404){
+          if(err.statusCode === 404 || err.statusCode === 403){
             uni.showModal({
               showCancel: false,
               title: '班级不存在',
               content: '请检查id是否输入错误'
             })
-          }else if(err.statusCode === 400){
+          }
+          else if(err.statusCode === 400){
             uni.showModal({
               showCancel: false,
               title: '出现错误',

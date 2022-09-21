@@ -24,9 +24,8 @@
       }
       const _handlePush = function(msg) {
         if (msg.payload.action == "open_page") {
-          uni.switchTab({
-            url: '/pages/index/index',
-            success: redirectTo(uni, msg.payload.url)
+          uni.navigateTo({
+            url: msg.payload.url
           })
         }
       };

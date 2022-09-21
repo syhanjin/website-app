@@ -7,12 +7,15 @@
     <view class="step">
       <finish-steps :current="0" />
       <u-search v-model="s1__kw" shape="square" :showAction="false" margin="5px 2vw" placeholder="请输入单词进行查找"></u-search>
-      <view class="word-box">
+      <view class="word-box" v-if="!loading">
         <u-button class="s1__word" v-for="(v, k, i) in review" :key="k" @click="$set(review, k, !v)"
           :type="v?'info':'primary'" v-if="!s1__kw||k.startsWith(s1__kw)">{{k}}</u-button>
         <!-- <u-button class="s1__word fix" disabled></u-button> -->
         <u-button class="s1__word" v-for="i in fix" :key="i" v-if="!s1__kw" disabled></u-button>
       </view>
+      <template v-else>
+        <u-loading-icon text="单词内容加载中" mode="semicircle" vertical textSize="10"></u-loading-icon>
+      </template>
     </view>
     <view class="step">
       <finish-steps :current="1" />
@@ -32,8 +35,8 @@
       <!-- <view class="s3__submitting" v-if="submit.submitting">
         <u-line-progress :percentage="submit.percentage" activeColor="#ff0000"></u-line-progress>
       </view> -->
-      <u-button loadingText="正在上传" :loading="submit.submitting" class="s3__btn" @click="submit_" type="primary" plain>
-        完成打卡</u-button>
+      <u-button loadingText="正在上传" :loading="submit.submitting" class="s3__btn" @click="submit_" type="primary" plain
+        :disabled="loading">完成打卡</u-button>
     </view>
   </view>
 </template>
@@ -64,7 +67,8 @@
           title: '',
           content: ''
         },
-        s1__kw: ''
+        s1__kw: '',
+        loading: true,
       }
     },
     async onLoad(option) {
@@ -161,6 +165,7 @@
             })
             const mod = resp.data.review.length % 3
             this.fix = mod ? (3 - mod) : 0
+            this.loading = false
           })
       }
     },
