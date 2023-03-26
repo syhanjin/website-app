@@ -1,7 +1,7 @@
 <template>
   <view>
-    <u-navbar title="词汇打卡">
-      <navigator slot="right" url="/pages/perfection/words/set_libraries">
+    <u-navbar title="成语打卡">
+      <navigator slot="right" url="/pages/perfection/chIdioms/set_libraries">
         <u-icon name="setting-fill"></u-icon>
       </navigator>
     </u-navbar>
@@ -36,7 +36,7 @@
         status: 'loading',
         page: 1,
         list: [],
-        payload: '/pages/perfection/words/words?wp_id='
+        payload: '/pages/perfection/chIdioms/chIdioms?wp_id='
       }
     },
     onLoad() {
@@ -61,7 +61,7 @@
       async loadPage(page) {
         this.status = 'loading'
         this.page = page || this.page
-        await this.$http.get('/perfection/words/?page=' + this.page)
+        await this.$http.get('/perfection/chIdioms/?page=' + this.page)
           .then(resp => {
             this.page++
             this.list = this.list.concat(resp.data.results)

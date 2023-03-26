@@ -9,7 +9,7 @@
         <text v-for="(error, index) in errors" :key="index">{{ error }}</text>
       </div>
       <u-form-item label="用户名" prop="name">
-        <u-input v-model="form.name" prefixIcon="account" />
+        <u-input v-model="form.name" prefixIcon="account" placeholder="用于登录您的账户"/>
       </u-form-item>
       <u-form-item label="密码" prop="pwd1">
         <u-input v-model="form.pwd1" prefixIcon="lock" password />

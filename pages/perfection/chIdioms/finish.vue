@@ -1,12 +1,12 @@
 <template>
   <view>
     <u-navbar>
-      <text slot="center">词汇打卡上传{{wp.updated || '' | dateFormat}}</text>
+      <text slot="center">成语打卡上传{{wp.updated || '' | dateFormat}}</text>
     </u-navbar>
     <u-modal :show="modal.show" :title="modal.title" :content='modal.content' @confirm="modal.show=false"></u-modal>
     <view class="step">
       <finish-steps :current="0" />
-      <u-search v-model="s1__kw" shape="square" :showAction="false" margin="5px 2vw" placeholder="请输入单词进行查找"></u-search>
+      <u-search v-model="s1__kw" shape="square" :showAction="false" margin="5px 2vw" placeholder="请输入成语进行查找"></u-search>
 
       <view class="word-box" v-if="!loading">
         <u-button class="s1__word" v-for="(v, k, i) in review" :key="k" @click="$set(review, k, !v)"
@@ -24,7 +24,7 @@
         <u-button class="s1__word" v-for="i in fix_addition" :key="i" v-if="!s1__kw" disabled></u-button>
       </view>
       <template v-else>
-        <u-loading-icon text="单词内容加载中" mode="semicircle" vertical textSize="10"></u-loading-icon>
+        <u-loading-icon text="内容加载中" mode="semicircle" vertical textSize="10"></u-loading-icon>
       </template>
     </view>
     <view class="step">
@@ -138,7 +138,7 @@
         // }
         this.submit.submitting = true
         let picture = await this.load_picture()
-        this.$http.post('/perfection/words/' + this.wp_id + '/finish/', {
+        this.$http.post('/perfection/chIdioms/' + this.wp_id + '/finish/', {
           'review': this.review,
           'addition': this.addition,
           'picture': picture
@@ -146,7 +146,7 @@
           this.submit.submitting = false
           // uni.navigateBack()
           uni.redirectTo({
-            url: '/pages/perfection/words/words?wp_id=' + this.wp_id
+            url: '/pages/perfection/chIdioms/chIdioms?wp_id=' + this.wp_id
           })
           // console.log(resp)
         }).catch(error => {
@@ -175,11 +175,11 @@
         // console.log(await this.load_picture())
       },
       async fetchData() {
-        await this.$http.get('/perfection/words/' + this.wp_id)
+        await this.$http.get('/perfection/chIdioms/' + this.wp_id)
           .then(resp => {
             this.wp = resp.data
           })
-        await this.$http.get('/perfection/words/' + this.wp_id + '/review/?simple=true')
+        await this.$http.get('/perfection/chIdioms/' + this.wp_id + '/review/?simple=true')
           .then(resp => {
             resp.data.review.map(value => {
               this.$set(this.review, value, true)
@@ -187,7 +187,7 @@
             const mod = resp.data.review.length % 3
             this.fix = mod ? (3 - mod) : 0
           })
-        await this.$http.get('/perfection/words/' + this.wp_id + '/addition/?simple=true')
+        await this.$http.get('/perfection/chIdioms/' + this.wp_id + '/addition/?simple=true')
           .then(resp => {
             resp.data.addition.map(value => {
               this.$set(this.addition, value, true)

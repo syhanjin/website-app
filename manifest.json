@@ -2,8 +2,8 @@
     "name" : "Sakuyark",
     "appid" : "__UNI__1EDB802",
     "description" : "",
-    "versionName" : "0.2.4",
-    "versionCode" : 204,
+    "versionName" : "0.3.4",
+    "versionCode" : 304,
     "transformPx" : false,
     "app-plus" : {
         /* 5+App特有相关 */
@@ -11,7 +11,8 @@
         "nvueCompiler" : "uni-app",
         "nvueStyleCompiler" : "uni-app",
         "modules" : {
-            "Push" : {}
+            "Push" : {},
+            "Camera" : {}
         },
         /* 模块配置 */
         "distribute" : {

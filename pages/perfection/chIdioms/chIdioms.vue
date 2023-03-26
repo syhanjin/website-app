@@ -1,7 +1,7 @@
 <template>
   <view>
     <u-navbar>
-      <text slot="center">词汇打卡{{wp.updated || '' | dateFormat}}</text>
+      <text slot="center">成语打卡{{wp.updated || '' | dateFormat}}</text>
     </u-navbar>
     <u-skeleton rows="25" :loading="loading"
       :rowsHeight="[75, 30, 60, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45]"
@@ -25,14 +25,14 @@
           </u-row>
         </view>
         <view class="remember-box" v-if="word_list.length">
-          <word-action @hide-all="hideAll" @shuffle="shuffle"/>
+          <chIdiomAction @hide-all="hideAll" @shuffle="shuffle"/>
           <view class="remember-row" @click="wordClick(index)" v-for="(word, index) in word_list" :key="word.word">
             <view class="remember__left" :class="{'right-hidden': word.rightHidden}">
-              <text class="cell word">{{word.word}}</text>
-              <text class="cell symbol">{{word.symbol}}</text>
+              <text class="cell word">{{word.key}}</text>
+              <text class="cell symbol"></text>
             </view>
             <view class="remember__right" v-if="!word.rightHidden">
-              <text class="cell chinese">{{word.chinese}}</text>
+              <text class="cell chinese">{{word.value}}</text>
             </view>
           </view>
         </view>
@@ -64,14 +64,14 @@
           <u-row class="remember-row">
             <u-text mode="text" align="center" text="以下是本次错误的单词"></u-text>
           </u-row>
-          <word-action @hide-all="hideAll" @shuffle="shuffle"/>
+          <chIdiomAction @hide-all="hideAll" @shuffle="shuffle"/>
           <view class="remember-row" @click="wordClick(index)" v-for="(word, index) in word_list" :key="word.word">
             <view class="remember__left" :class="{'right-hidden': word.rightHidden}">
-              <text class="cell word">{{word.word}}</text>
-              <text class="cell symbol">{{word.symbol}}</text>
+              <text class="cell word">{{word.key}}</text>
+              <text class="cell symbol"></text>
             </view>
             <view class="remember__right" v-if="!word.rightHidden">
-              <text class="cell chinese">{{word.chinese}}</text>
+              <text class="cell chinese">{{word.value}}</text>
             </view>
           </view>
         </view>
@@ -86,7 +86,7 @@
     baseURL
   } from '@/request.js'
   import moment from '@/node_modules/moment'
-  import wordAction from './components/wordAction.vue'
+  import chIdiomAction from './components/chIdiomAction.vue'
   export default {
     data() {
       return {
@@ -96,7 +96,7 @@
         wp: {}
       }
     },
-    components: {wordAction},
+    components: {chIdiomAction},
     async onLoad(option) {
       this.wp_id = option.wp_id
       if (!this.wp_id) {
@@ -107,17 +107,17 @@
     },
     methods: {
       async fetchData() {
-        await this.$http.get('/perfection/words/' + this.wp_id)
+        await this.$http.get('/perfection/chIdioms/' + this.wp_id)
           .then(resp => {
             this.wp = resp.data
           })
         if (this.is_finished) {
-          await this.$http.get('/perfection/words/' + this.wp_id + '/unremembered/')
+          await this.$http.get('/perfection/chIdioms/' + this.wp_id + '/unremembered/')
             .then(resp => {
               this.word_list = resp.data.unremembered
             })
         } else {
-          await this.$http.get('/perfection/words/' + this.wp_id + '/remember/')
+          await this.$http.get('/perfection/chIdioms/' + this.wp_id + '/remember/')
             .then(resp => {
               this.word_list = resp.data.remember
             })
@@ -127,12 +127,12 @@
       goFinish() {
         // 不要在意名字
         uni.navigateTo({
-          url: '/pages/perfection/words/finish?wp_id=' + this.wp_id
+          url: '/pages/perfection/chIdioms/finish?wp_id=' + this.wp_id
         })
       },
       goFinishLive(){
         uni.navigateTo({
-          url: '/pages/perfection/words/finishLive/finishLive?wp_id=' + this.wp_id
+          url: '/pages/perfection/chIdioms/finishLive/finishLive?wp_id=' + this.wp_id
         })
       },
       wordClick(index) {
@@ -154,7 +154,7 @@
         // this.$forceUpdate()
       },
       download(type) {
-        const url = baseURL + '/perfection/words/' + this.wp_id + '/' + type + '_file/';
+        const url = baseURL + '/perfection/chIdioms/' + this.wp_id + '/' + type + '_file/';
         const header = {
           Authorization: 'Token ' + this.$store.state.token
         }
