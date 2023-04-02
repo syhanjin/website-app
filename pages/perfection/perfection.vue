@@ -45,7 +45,7 @@
           {
             name: 'info-circle',
             title: '打卡系统说明',
-            path: '/pages/perfection/readme'
+            path: '/pages/webpage?src=http://docs.sakuyark.com/perfection/'
           }
         ]
       }

@@ -78,13 +78,6 @@
       "enablePullDownRefresh": false
     }
   }, {
-    "path": "pages/perfection/readme",
-    "style": {
-      "enablePullDownRefresh": false,
-      "navigationStyle": "default",
-      "navigationBarTitleText": "打卡系统说明"
-    }
-  }, {
     "path": "pages/perfection/words/set_libraries",
     "style": {
       "enablePullDownRefresh": false
@@ -114,6 +107,12 @@
     "style": {
       "enablePullDownRefresh": false
     }
+  }, {
+    "path": "pages/webpage",
+    "style": {
+      "enablePullDownRefresh": false
+    }
+
   }],
   "globalStyle": {
     "navigationBarTextStyle": "black",

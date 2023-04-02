@@ -96,6 +96,7 @@
   @import '@/uni_modules/uni-scss/index.scss';
   @import '@/uni_modules/uview-ui/index.scss';
   @import '@/static/uview-icons/iconfont.css';
+  @import '@/uni_modules/jo-markdown/components/jo-markdown/main.css';
 
   * {
     margin: 0;
